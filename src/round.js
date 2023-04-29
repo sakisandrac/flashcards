@@ -4,13 +4,13 @@ const takeTurn = (guess, round) => {
   round.currentCard = round.deck[round.turns];
   round.turns += 1;
 
-  round.result = evaluateGuess(guess, round.currentCard.correctAnswer);
+  result = evaluateGuess(guess, round.currentCard.correctAnswer);
 
-  if(round.result === 'incorrect!'){
+  if(result === 'incorrect!'){
     round.incorrectGuesses.push(round.currentCard.id);
   }
   
-  return round;
+  return result;
 }
 
 const calculatePercentCorrect = (round) => {
