@@ -97,7 +97,7 @@ describe('turn', function() {
     const round = createRound(deck);
     const round1 = takeTurn('sea otter', round);
 
-    expect(round1.currentCard.id).to.deep.equal(1)
+    expect(round.currentCard.id).to.deep.equal(1)
   });
 
   it('should select a second currentCard', function() {
@@ -112,7 +112,7 @@ describe('turn', function() {
 
     const round2 = takeTurn('pug', round);
    
-    expect(round2.currentCard.id).to.deep.equal(14)
+    expect(round.currentCard.id).to.deep.equal(14)
   });
 
   it('should select a third currentCard', function() {
@@ -129,7 +129,7 @@ describe('turn', function() {
 
     const round3 = takeTurn('capybara', round);
  
-    expect(round3.currentCard.id).to.deep.equal(12)
+    expect(round.currentCard.id).to.deep.equal(12)
   });
 
   it('should be able to check an incorrect guess', function() {
@@ -143,7 +143,7 @@ describe('turn', function() {
     const round1 = takeTurn('pug', round);
 
  
-  expect(round1.result).to.deep.equal('incorrect!')
+  expect(round1).to.deep.equal('incorrect!')
   });
 
   it('should be able to check a correct guess', function() {
@@ -157,7 +157,7 @@ describe('turn', function() {
     const round1 = takeTurn('sea otter', round);
 
  
-  expect(round1.result).to.deep.equal('correct!')
+  expect(round1).to.deep.equal('correct!')
   });
 
   it('should be able to update incorrect guesses', function() {
@@ -169,8 +169,8 @@ describe('turn', function() {
   
     const round = createRound(deck);
     const round1 = takeTurn('pug', round);
-// console.log(round1)
-  expect(round1.incorrectGuesses.length).to.deep.equal(1)
+
+  expect(round.incorrectGuesses.length).to.deep.equal(1)
   });
 
 })
@@ -186,8 +186,8 @@ describe('calculate percent', function() {
     const round = createRound(deck);
     const round1 = takeTurn('pug', round);
     const round2 = takeTurn('gallbladder', round);
-    const result = calculatePercentCorrect(round2);
-    console.log(round2)
+    const result = calculatePercentCorrect(round);
+
     expect(result).to.deep.equal(50);
   });  
 });
