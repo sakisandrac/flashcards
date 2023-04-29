@@ -9,8 +9,8 @@ const takeTurn = (guess, round) => {
   if(round.result === 'incorrect!'){
     round.incorrectGuesses.push(round.currentCard.id);
   }
-// console.log(round.result)
-  return round.result;
+  
+  return round;
 }
 
 const calculatePercentCorrect = (round) => {
