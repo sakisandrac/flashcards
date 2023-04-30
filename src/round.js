@@ -8,16 +8,24 @@ const giveFeedback = (guess) => {
   }
 }
 
-const takeTurn = (guess, round) => {
-  let result = evaluateGuess(guess, round.currentCard.correctAnswer);
-
+const storeIncorrectGuesses = (result, round) => {
   if(!result){
     round.incorrectGuesses.push(round.currentCard.id);
   }
+}
 
+const updateRound = (round) => {
   round.turns += 1;
   round.deck.shift();
   round.currentCard = round.deck[0]
+}
+
+const takeTurn = (guess, round) => {
+  let result = evaluateGuess(guess, round.currentCard.correctAnswer);
+  storeIncorrectGuesses(result, round);
+
+  updateRound(round);
+
   return giveFeedback(result);
 }
 
