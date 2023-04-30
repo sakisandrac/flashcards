@@ -15,19 +15,15 @@ function printQuestion(round) {
 }
 
 function start() {
-  let cards = [];
-  prototypeQuestions.forEach((card) => {
-    createCard(card.id, card.question, card.answers, card.correctAnswer)
-    cards.push(card);
-  })
-  let deck = createDeck(prototypeQuestions);
+  let cards = prototypeQuestions.reduce((cards, question) => {
+    cards.push(createCard(question.id, question.question, question.answers, question.correctAnswer))
+    return cards;
+  }, []);
+  let deck = createDeck(cards);
   let round = createRound(deck);
- console.log('card id in start', round.currentCard.id)
 
   printMessage(deck);
   printQuestion(round);
 }
 
-start(); 
-
-module.exports = { printMessage, printQuestion };
+module.exports = { printMessage, printQuestion, start };
