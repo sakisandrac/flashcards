@@ -12,26 +12,30 @@ function printQuestion(round) {
   util.main(round);
 }
 
-// console.log(prototypeQuestions)
-// let cards = []
-// let card = prototypeQuestions.forEach((card) => {
-//   createCard(card.id, card.question, card.answers, card.correctAnswer)
-//   cards.push(card)
-// })
-// console.log(cards)
-
 function start() {
-  let cards = []
+ 
+
+  let cards = [];
   prototypeQuestions.forEach((card) => {
     createCard(card.id, card.question, card.answers, card.correctAnswer)
-    cards.push(card)
+    cards.push(card);
   })
-  console.log(cards)
-  let deck = createDeck(cards);
-  let round = createRound(deck)
+  let deck = createDeck(prototypeQuestions);
+  let round = createRound(deck);
+ console.log('card id in start', round.currentCard.id)
+
   printMessage(deck);
   printQuestion(round);
 }
+
+// let cards = [];
+// prototypeQuestions.forEach((card) => {
+//   createCard(card.id, card.question, card.answers, card.correctAnswer)
+//   cards.push(card);
+// })
+
+// let deck = createDeck(cards);
+// let round = createRound(deck);
 
 start(); 
 
