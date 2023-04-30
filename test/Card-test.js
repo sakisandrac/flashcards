@@ -1,8 +1,10 @@
 const chai = require('chai');
 const expect = chai.expect;
 
-const { createCard, evaluateGuess, createDeck, countCards, createRound } = require('../src/card');
+const { createCard, createRound } = require('../src/card');
 const {takeTurn, calculatePercentCorrect } = require('../src/round');
+const { evaluateGuess } = require('../src/turns');
+const { createDeck, countCards } = require('../src/deck');
 
 describe('card', function() {
   it('should be a function', function() {

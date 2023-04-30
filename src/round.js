@@ -1,4 +1,4 @@
-const { evaluateGuess } = require('../src/card');
+const { evaluateGuess } = require('./turns');
 
 const giveFeedback = (guess) => {
   if (guess) {

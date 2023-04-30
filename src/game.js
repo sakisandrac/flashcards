@@ -1,4 +1,6 @@
-const { createCard, evaluateGuess, createDeck, countCards, createRound, takeTurn, calculatePercentCorrect } = require('./card');
+const { createCard, createRound } = require('./card');
+const { createDeck, countCards } = require('./deck');
+
 const data = require('./data');
 const prototypeQuestions = data.prototypeData;
 const util = require('./util');
