@@ -9,15 +9,6 @@ const giveFeedback = (guess) => {
 }
 
 const takeTurn = (guess, round) => {
-  // console.log('in turns', round.deck[0])
-  // round.currentCard = round.deck[0]
-  // if (round.turns >= 1){
-  //   round.currentCard = round.deck[round.turns]
-  // }
-  // console.log('inturn', round.currentCard)
-  
-  // console.log('inturn2', round.currentCard)
-
   let result = evaluateGuess(guess, round.currentCard.correctAnswer);
 
   if(!result){
@@ -26,7 +17,6 @@ const takeTurn = (guess, round) => {
 
   round.turns += 1;
   round.deck.shift();
-  // console.log('after shift', round.deck[0])
   round.currentCard = round.deck[0]
   return giveFeedback(result);
 }
