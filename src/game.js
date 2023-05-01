@@ -1,4 +1,6 @@
-const { createCard, evaluateGuess, createDeck, countCards, createRound, takeTurn, calculatePercentCorrect } = require('./card');
+const { createCard, createRound } = require('./card');
+const { createDeck, countCards } = require('./deck');
+
 const data = require('./data');
 const prototypeQuestions = data.prototypeData;
 const util = require('./util');
@@ -13,8 +15,6 @@ function printQuestion(round) {
 }
 
 function start() {
- 
-
   let cards = [];
   prototypeQuestions.forEach((card) => {
     createCard(card.id, card.question, card.answers, card.correctAnswer)
@@ -27,15 +27,6 @@ function start() {
   printMessage(deck);
   printQuestion(round);
 }
-
-// let cards = [];
-// prototypeQuestions.forEach((card) => {
-//   createCard(card.id, card.question, card.answers, card.correctAnswer)
-//   cards.push(card);
-// })
-
-// let deck = createDeck(cards);
-// let round = createRound(deck);
 
 start(); 
 
