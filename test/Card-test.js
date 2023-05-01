@@ -11,7 +11,7 @@ describe('card', function() {
 
   it('should create a card and its properties', function() {
     const card = createCard(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object');
-    
+
     expect(card.id).to.equal(1);
     expect(card.question).to.equal('What allows you to define a set of related information using key-value pairs?');
     expect(card.answers).to.deep.equal(['object', 'array', 'function']);
@@ -24,11 +24,11 @@ describe('turn', function() {
     expect(evaluateGuess).to.be.a('function');
   });
 
-  it('should return a string with the result', function() {
+  it('should return a boolean result', function() {
     const result = evaluateGuess('object', 'object')
-    expect(result).to.equal('correct!');
+    expect(result).to.equal(true);
     const result2 = evaluateGuess('array', 'object')
-    expect(result2).to.equal('incorrect!');
+    expect(result2).to.equal(false);
    
   });  
 });
@@ -84,10 +84,20 @@ describe('round', function() {
 
       expect(round.turns).to.equal(0)
     });
-});
 
-describe('turn', function() {
-  it('should select a currentCard', function() {
+  it('should come with currentCard selected', function() {
+    const card1 = createCard(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = createCard(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+    
+    const deck = createDeck([card1, card2, card3]);
+    
+    const round = createRound(deck);
+
+    expect(round.currentCard.id).to.deep.equal(1)
+  });
+
+  it('should update currentCard', function() {
     const card1 = createCard(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
@@ -97,10 +107,10 @@ describe('turn', function() {
     const round = createRound(deck);
     const round1 = takeTurn('sea otter', round);
 
-    expect(round.currentCard.id).to.deep.equal(1)
+    expect(round.currentCard.id).to.deep.equal(14)
   });
 
-  it('should select a second currentCard', function() {
+  it('should update another currentCard', function() {
     const card1 = createCard(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
     const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
     const card3 = createCard(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
@@ -112,23 +122,6 @@ describe('turn', function() {
 
     const round2 = takeTurn('pug', round);
    
-    expect(round.currentCard.id).to.deep.equal(14)
-  });
-
-  it('should select a third currentCard', function() {
-    const card1 = createCard(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-    const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
-    const card3 = createCard(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
-  
-    const deck = createDeck([card1, card2, card3]);
-  
-    const round = createRound(deck);
-    const round1 = takeTurn('sea otter', round);
-
-    const round2 = takeTurn('pug', round);
-
-    const round3 = takeTurn('capybara', round);
- 
     expect(round.currentCard.id).to.deep.equal(12)
   });
 
@@ -142,7 +135,6 @@ describe('turn', function() {
     const round = createRound(deck);
     const round1 = takeTurn('pug', round);
 
- 
   expect(round1).to.deep.equal('incorrect!')
   });
 
@@ -155,9 +147,22 @@ describe('turn', function() {
   
     const round = createRound(deck);
     const round1 = takeTurn('sea otter', round);
-
- 
+   
   expect(round1).to.deep.equal('correct!')
+  });
+
+  it('should be able to check another correct guess', function() {
+    const card1 = createCard(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = createCard(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+  
+    const deck = createDeck([card1, card2, card3]);
+  
+    const round = createRound(deck);
+    const round1 = takeTurn('pug', round);
+    const round2 = takeTurn('gallbladder', round);
+
+  expect(round2).to.deep.equal('correct!')
   });
 
   it('should be able to update incorrect guesses', function() {
@@ -171,6 +176,19 @@ describe('turn', function() {
     const round1 = takeTurn('pug', round);
 
   expect(round.incorrectGuesses.length).to.deep.equal(1)
+  });
+
+  it('should add 1 turn to each round', () => {
+    const card1 = createCard(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+    const card2 = createCard(14, 'What organ is Khalid missing?', ['spleen', 'appendix', 'gallbladder'], 'gallbladder');
+    const card3 = createCard(12, 'What is Travis\'s favorite stress reliever?', ['listening to music', 'watching Netflix', 'playing with bubble wrap'], 'playing with bubble wrap');
+    
+    const deck = createDeck([card1, card2, card3]);
+  
+    const round = createRound(deck);
+    const round1 = takeTurn('pug', round);
+    
+    expect(round.turns).to.equal(1);
   });
 
 })
