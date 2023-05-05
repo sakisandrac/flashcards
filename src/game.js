@@ -15,10 +15,9 @@ function printQuestion(round) {
 }
 
 function start() {
-  let cards = prototypeQuestions.reduce((cards, question) => {
-    cards.push(createCard(question.id, question.question, question.answers, question.correctAnswer))
-    return cards;
-  }, []);
+  let cards = prototypeQuestions.map((card) => {
+    return createCard(card.id, card.question, card.answers, card.correctAnswer);
+  })
   let deck = createDeck(cards);
   let round = createRound(deck);
 
