@@ -1,4 +1,5 @@
-const { createCard, createRound } = require('./card');
+const { createCard } = require('./card');
+const { createRound } = require('./round');
 const { createDeck, countCards } = require('./deck');
 
 const data = require('./data');

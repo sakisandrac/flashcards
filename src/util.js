@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
-const { takeTurn, endRound } = require('./round')
+const { endRound } = require('./round')
+const { takeTurn } = require('./turns')
 
 const genList = (round) => {
   let card = round.currentCard;
@@ -16,7 +17,6 @@ const genList = (round) => {
     name: 'answers',
     choices: choices
   };
- 
 }
 
 const getRound = (round) => {
