@@ -18,6 +18,8 @@ function start() {
   let cards = prototypeQuestions.map((card) => {
     return createCard(card.id, card.question, card.answers, card.correctAnswer);
   })
+
+  // let deck = creatDeck(prototypeQuestions)
   let deck = createDeck(cards);
   let round = createRound(deck);
 

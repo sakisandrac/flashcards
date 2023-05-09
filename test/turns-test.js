@@ -10,9 +10,9 @@ describe('turn', function() {
 
   it('should return a boolean result', function() {
     const result = evaluateGuess('object', 'object')
-    expect(result).to.equal(true);
     const result2 = evaluateGuess('array', 'object')
+    
+    expect(result).to.equal(true);
     expect(result2).to.equal(false);
-   
   });  
 });
