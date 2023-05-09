@@ -1,10 +1,11 @@
-
 const createDeck = (cards) => {
-  return cards
+  return {
+    deck: cards
+  }
  }
  
  const countCards = (deck) => {
-   return deck.length;
+   return deck.deck.length;
  }
 
  module.exports = {
