@@ -1,4 +1,5 @@
-const { createCard, createRound } = require('./card');
+const { createCard } = require('./card');
+const { createRound } = require('./round');
 const { createDeck, countCards } = require('./deck');
 
 const data = require('./data');
@@ -18,8 +19,6 @@ function start() {
   let cards = prototypeQuestions.map((card) => {
     return createCard(card.id, card.question, card.answers, card.correctAnswer);
   })
-
-  // let deck = creatDeck(prototypeQuestions)
   let deck = createDeck(cards);
   let round = createRound(deck);
 
